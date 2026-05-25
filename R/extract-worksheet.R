@@ -20,9 +20,9 @@ extract_worksheet <- function(input){
     stop("input must not be empty")
   }
 
-  output <- stringr::str_extract(string = input,
+  output <- toupper(stringr::str_extract(string = input,
                                  pattern = regex_ids()$worksheet,
-                                 group = 1)
+                                 group = 1))
 
   if(is.na(output)) {
     warning("NA value returned")
@@ -31,5 +31,3 @@ extract_worksheet <- function(input){
   return(output)
 
 }
-
-

@@ -108,7 +108,7 @@ gene_plot
 
 `labno2` is designed to help me do exploratory data analysis on multiple files quickly
 and reproducibly.
-It is build around `tidyverse` packages including `stringr`, `readr` and `dplyr`.
+It is built around `tidyverse` packages including `stringr`, `readr` and `dplyr`.
 
 `labno2` aims to include functionality which is shared across multiple projects that
 I do. 
@@ -134,7 +134,7 @@ be anonymised, and the research identifier may be included in place of the sampl
 name. The research identifier may also include numbers or other non-letter characters.
 Example: "study0001"
 
-These reaons mean that designing a regular expression to identify a patient name
+These reasons mean that designing a regular expression to identify a patient name
 in a filename is complicated.
 One option is to use the position of the name in the string relative to more 
 consistent identifiers, like lab number and worksheet number, but this is then 
