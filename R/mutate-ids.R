@@ -16,6 +16,10 @@ mutate_ids <- function(df,
   #' from the filename column
   #' @export
 
+  if(!is.data.frame(df)){
+    stop("input must be a dataframe")
+  }
+
   output <- df |>
     dplyr::rowwise() |>
     dplyr::mutate(
@@ -25,6 +29,10 @@ mutate_ids <- function(df,
       labno_suffix = paste0(labno, suffix),
       labno_suffix_worksheet = paste0(labno_suffix, "_", worksheet)) |>
     dplyr::ungroup()
+
+  if(anyNA.data.frame(output)){
+    warning("output contains NA values")
+  }
 
   return(output)
 

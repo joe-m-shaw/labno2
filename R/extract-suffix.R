@@ -25,7 +25,7 @@ extract_suffix <- function(input){
 
   output <- stringr::str_extract(string = input,
                                  pattern = regex_ids()$labno_suffix,
-                                 group = 2)
+                                 group = 3)
 
   if(is.na(output)) {
     warning("NA value returned")

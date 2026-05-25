@@ -22,7 +22,8 @@ extract_worksheet <- function(input){
   }
 
   output <- stringr::str_extract(string = input,
-                                 pattern = regex_ids()$worksheet)
+                                 pattern = regex_ids()$worksheet,
+                                 group = 1)
 
   if(is.na(output)) {
     warning("NA value returned")

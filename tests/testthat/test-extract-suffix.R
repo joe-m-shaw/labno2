@@ -9,3 +9,10 @@ test_that("extract_suffix works without suffix", {
                "")
 
 })
+
+test_that("labno at the end of the string is handled as empty suffix", {
+
+  expect_equal(extract_suffix("WS123456_12345678"),
+               "")
+
+})

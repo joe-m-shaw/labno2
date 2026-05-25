@@ -10,7 +10,8 @@ regex_ids()
 A named list of regular expressions for different identifiers
 }
 \description{
-Regular expressions for sample identifiers
+Labno is specified as having non-digits on either side, to prevent
+extracting 8 digits from a longer string of digits.
 }
 \examples{
 regex_ids()$labno_suffix
