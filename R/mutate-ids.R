@@ -1,20 +1,19 @@
+#' Add sample identifiers from filename as additional data columns
+#'
+#' This function extracts the 3 common identifiers (worksheet, labno and
+#' suffix) which are included in filenames.
+#'
+#' Patient name and NGS panel are both not included in `mutate_ids`, as they
+#' are not always present in filenames.
+#'
+#' @param df The dataframe to add identifiers to
+#' @param id_col The column in the dataframe which includes the filename
+#'
+#' @returns The original dataframe with additional columns of identifiers
+#' from the filename column
+#' @export
 mutate_ids <- function(df,
                        id_col = filename){
-
-  #' Add sample identifiers from filename as additional data columns
-  #'
-  #' This function extracts the 3 common identifiers (worksheet, labno and
-  #' suffix) which are included in filenames.
-  #'
-  #' Patient name and NGS panel are both not included in `mutate_ids`, as they
-  #' are not always present in filenames.
-  #'
-  #' @param df The dataframe to add identifiers to
-  #' @param id_col The column in the dataframe which includes the filename
-  #'
-  #' @returns The original dataframe with additional columns of identifiers
-  #' from the filename column
-  #' @export
 
   if(!is.data.frame(df)){
     stop("input must be a dataframe")

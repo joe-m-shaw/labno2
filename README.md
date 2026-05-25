@@ -35,6 +35,9 @@ If you spot some, please let me know.
 For the purpose of testing functions, I have used generic examples for
 worksheet (WS123456) and lab number (12345678) values.
 
+Where examples of patient names are required, I have used character
+names from novels by Leo Tolstoy (Anna Karenina, Pierre Bezukhov etc).
+
 ## Example
 
 You can use `labno2` to extract sample identifiers stored in filenames,
@@ -84,8 +87,9 @@ data <- data.frame(
 )
 
 mutate_ids(data)
-#>             filename gene_result    labno suffix worksheet labno_suffix
-#> 1 WS123456_12345678a           1 12345678      a  WS123456    12345678a
-#>   labno_suffix_worksheet
-#> 1     12345678a_WS123456
+#> # A tibble: 1 × 7
+#>   filename           gene_result labno    suffix worksheet labno_suffix
+#>   <chr>                    <dbl> <chr>    <chr>  <chr>     <chr>       
+#> 1 WS123456_12345678a           1 12345678 a      WS123456  12345678a   
+#> # ℹ 1 more variable: labno_suffix_worksheet <chr>
 ```

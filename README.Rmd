@@ -44,6 +44,8 @@ If you spot some, please let me know.
 For the purpose of testing functions, I have used generic examples for 
 worksheet (WS123456) and lab number (12345678) values.
 
+Where examples of patient names are required, I have used character names from novels by Leo Tolstoy (Anna Karenina, Pierre Bezukhov etc).
+
 ## Example
 
 You can use `labno2` to extract sample identifiers stored in filenames, which is useful when doing data projects involving multiple sample files.

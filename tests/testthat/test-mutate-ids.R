@@ -163,3 +163,23 @@ test_that("spaces, full-stops and hyphens between identifiers are handled correc
                expected_df)
 
 })
+
+test_that("filename with a different order is handled correctly", {
+
+  input <- tibble::tibble(
+    "filename" = c("12345678_v2aSchwannAll_PS_WS123456_new.xlsx"))
+
+  expected_df <- tibble::tibble(
+    "filename" = c("12345678_v2aSchwannAll_PS_WS123456_new.xlsx"),
+    "labno" = c("12345678"),
+    "suffix" = c(""),
+    "worksheet" = c("WS123456"),
+    "labno_suffix" = c("12345678"),
+    "labno_suffix_worksheet" = c("12345678_WS123456")
+    )
+
+  expect_equal(mutate_ids(input),
+               expected_df)
+
+})
+
