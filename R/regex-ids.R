@@ -5,7 +5,7 @@ regex_ids <- function(){
   #' @returns A named list of regular expressions for different identifiers
   #' @export
   #'
-  #' @examples regex_ids()$labno
+  #' @examples regex_ids()$labno_suffix
 
   output_list <- list(
 
