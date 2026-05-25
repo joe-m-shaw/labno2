@@ -1,0 +1,117 @@
+# labno2
+
+`labno2` is a package that makes it easier to work with sample
+identifiers used at the North West Genomic Laboratory Hub.
+
+# What does it mean?
+
+Each sample is given a DNA “lab number” which is stored as “labno” in
+sample databases.
+
+## Installation
+
+You can install the development version of labno2 from
+[GitHub](https://github.com/) with:
+
+``` r
+
+# install.packages("pak")
+pak::pak("joe-m-shaw/labno2")
+```
+
+## Information Governance
+
+**No patient identifiable information should be included in this
+repository.**
+
+If you spot some, please let me know.
+
+For the purpose of testing functions, I have used generic examples for
+worksheet (WS123456) and lab number (12345678) values.
+
+Where examples of patient names are required, I have used character
+names from novels by Leo Tolstoy (Anna Karenina, Pierre Bezukhov etc).
+
+## Example
+
+You can use `labno2` to extract sample identifiers stored in filenames,
+which is useful when doing data projects involving multiple sample
+files.
+
+``` r
+
+
+library(labno2)
+
+filename <- "WS123456_12345678a"
+```
+
+Using `labno2`, you can quickly extract the worksheet number that the
+sample was tested on
+
+``` r
+
+
+extract_worksheet(filename)
+#> [1] "WS123456"
+```
+
+You can extract the lab number, and its suffix (if present). Samples
+which are tested multiple times per worksheet will have suffixes of a,
+b, c etc.
+
+``` r
+
+
+extract_labno(filename)
+#> [1] "12345678"
+```
+
+``` r
+
+
+extract_suffix(filename)
+#> [1] "a"
+```
+
+`labno` also includes the `mutate_ids` function to extract all this
+information in one go from a dataframe column.
+
+``` r
+
+
+data <- data.frame(
+  "filename" = c(filename),
+  "gene_result" = c(1)
+)
+
+mutate_ids(data)
+#> # A tibble: 1 × 7
+#>   filename           gene_result labno    suffix worksheet labno_suffix
+#>   <chr>                    <dbl> <chr>    <chr>  <chr>     <chr>       
+#> 1 WS123456_12345678a           1 12345678 a      WS123456  12345678a   
+#> # ℹ 1 more variable: labno_suffix_worksheet <chr>
+```
+
+# Package index
+
+## All functions
+
+- [`extract_labno()`](extract_labno.md) : Extract lab number from a
+  string
+- [`extract_suffix()`](extract_suffix.md) : Extract a sample replicate
+  suffix from a string
+- [`extract_worksheet()`](extract_worksheet.md) : Extract worksheet from
+  a character string
+- [`mutate_ids()`](mutate_ids.md) : Add sample identifiers from filename
+  as additional data columns
+- [`read_csv_ids()`](read_csv_ids.md) : Read a csv file and add
+  identifiers
+- [`regex_ids()`](regex_ids.md) : Regular expressions for sample
+  identifiers
+
+# Articles
+
+### All vignettes
+
+- [Reading files with labno2](reading-files.md):

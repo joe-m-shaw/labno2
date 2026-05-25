@@ -1,0 +1,16 @@
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/LICENSE.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/articles/reading-files.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/reference/extract_labno.html</loc></url>
+<url><loc>/reference/extract_suffix.html</loc></url>
+<url><loc>/reference/extract_worksheet.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/mutate_ids.html</loc></url>
+<url><loc>/reference/read_csv_ids.html</loc></url>
+<url><loc>/reference/regex_ids.html</loc></url>
+</urlset>
+
