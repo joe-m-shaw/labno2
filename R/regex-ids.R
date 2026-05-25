@@ -9,8 +9,8 @@ regex_ids <- function(){
 
   output_list <- list(
 
-    "worksheet" = "(WS\\d{6})",
-    "labno_suffix" = "(\\d{8})(a|b|c|d|)"
+    "worksheet" = "(WS\\d{6}|ws\\d{6})",
+    "labno_suffix" = "(\\d{8})(a|b|c|d|e|)"
   )
 
   return(output_list)

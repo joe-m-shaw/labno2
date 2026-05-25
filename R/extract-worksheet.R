@@ -13,9 +13,23 @@ extract_worksheet <- function(input){
   #'
   #' @examples extract_worksheet("WS123456_12345678")
 
+  if(!is.character(input)){
+    stop("input must be a string")
+  }
+
+  if(input == ""){
+    stop("input must not be empty")
+  }
+
   output <- stringr::str_extract(string = input,
                                  pattern = regex_ids()$worksheet)
+
+  if(is.na(output)) {
+    warning("NA value returned")
+  }
 
   return(output)
 
 }
+
+

@@ -29,6 +29,10 @@ extract_labno <- function(input){
                                  pattern = regex_ids()$labno_suffix,
                                  group = 1)
 
+  if(is.na(output)) {
+     warning("NA value returned")
+  }
+
   return(output)
 
 }

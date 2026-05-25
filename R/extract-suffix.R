@@ -15,9 +15,21 @@ extract_suffix <- function(input){
   #'
   #' @examples extract_suffix("WS123456_12345678a_replicate1")
 
+  if(!is.character(input)){
+    stop("input must be a string")
+  }
+
+  if(input == ""){
+    stop("input must not be empty")
+  }
+
   output <- stringr::str_extract(string = input,
                                  pattern = regex_ids()$labno_suffix,
                                  group = 2)
+
+  if(is.na(output)) {
+    warning("NA value returned")
+  }
 
   return(output)
 

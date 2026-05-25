@@ -17,12 +17,14 @@ mutate_ids <- function(df,
   #' @export
 
   output <- df |>
+    dplyr::rowwise() |>
     dplyr::mutate(
       labno = extract_labno({{ id_col }}),
       suffix = extract_suffix({{ id_col }}),
       worksheet = extract_worksheet({{ id_col }}),
       labno_suffix = paste0(labno, suffix),
-      labno_suffix_worksheet = paste0(labno_suffix, "_", worksheet))
+      labno_suffix_worksheet = paste0(labno_suffix, "_", worksheet)) |>
+    dplyr::ungroup()
 
   return(output)
 
