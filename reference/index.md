@@ -12,5 +12,7 @@
   as additional data columns
 - [`read_csv_ids()`](read_csv_ids.md) : Read a csv file and add
   identifiers
+- [`read_vcf_as_df()`](read_vcf_as_df.md) : Read a VCF file into R as a
+  data frame
 - [`regex_ids()`](regex_ids.md) : Regular expressions for sample
   identifiers
