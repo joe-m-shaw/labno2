@@ -16,22 +16,8 @@
 #' @examples extract_labno("WS123456_12345678")
 extract_labno <- function(input){
 
-  if(!is.character(input)){
-    stop("input must be a string")
-  }
-
-  if(input == ""){
-    stop("input must not be empty")
-  }
-
-  output <- stringr::str_extract(string = input,
-                                 pattern = regex_ids()$labno_suffix,
-                                 group = 2)
-
-  if(is.na(output)) {
-     warning("NA value returned")
-  }
-
-  return(output)
+  extract_id(input = input,
+             pattern = regex_ids()$labno_suffix$regex,
+             group = regex_ids()$labno_suffix$labno)
 
 }

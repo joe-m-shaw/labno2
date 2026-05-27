@@ -12,22 +12,8 @@
 #' @examples extract_worksheet("WS123456_12345678")
 extract_worksheet <- function(input){
 
-  if(!is.character(input)){
-    stop("input must be a string")
-  }
-
-  if(input == ""){
-    stop("input must not be empty")
-  }
-
-  output <- toupper(stringr::str_extract(string = input,
-                                 pattern = regex_ids()$worksheet,
-                                 group = 1))
-
-  if(is.na(output)) {
-    warning("NA value returned")
-  }
-
-  return(output)
+  extract_id(input = input,
+             pattern = regex_ids()$worksheet$regex,
+             group = regex_ids()$worksheet$worksheet_group)
 
 }

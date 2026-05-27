@@ -11,8 +11,13 @@ regex_ids <- function(){
 
   output_list <- list(
 
-    "worksheet" = "(WS\\d{6}|ws\\d{6})\\D+",
-    "labno_suffix" = "(^|\\D+)(\\d{8})(a|b|c|d|)(\\D+|$)"
+    "worksheet" = list(
+      "regex" = "(WS\\d{6}|ws\\d{6})\\D+",
+      "worksheet_group" = 1),
+    "labno_suffix" = list(
+      "regex" = "(^|\\D+)(\\d{8})(a|b|c|d|)(\\D+|$)",
+      "labno_group" = 2,
+      "suffix_group" = 3)
   )
 
   return(output_list)
