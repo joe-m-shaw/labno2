@@ -1,0 +1,32 @@
+##fileformat=VCFv4.2
+##fileDate=20260527
+##source=SyntheticTestDataGeneratedByClaudeThisIsNotPatientData
+##reference=GRCh38
+##contig=<ID=1,length=248956422>
+##contig=<ID=2,length=242193529>
+##contig=<ID=X,length=156040895>
+##INFO=<ID=DP,Number=1,Type=Integer,Description="Total read depth">
+##INFO=<ID=AF,Number=A,Type=Float,Description="Allele frequency">
+##INFO=<ID=DB,Number=0,Type=Flag,Description="dbSNP membership">
+##INFO=<ID=SVTYPE,Number=1,Type=String,Description="Type of structural variant">
+##INFO=<ID=END,Number=1,Type=Integer,Description="End position of the variant">
+##INFO=<ID=CIPOS,Number=2,Type=Integer,Description="Confidence interval around POS">
+##FILTER=<ID=PASS,Description="All filters passed">
+##FILTER=<ID=LowQual,Description="Low quality call">
+##FILTER=<ID=LowDepth,Description="Read depth below threshold">
+##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
+##FORMAT=<ID=DP,Number=1,Type=Integer,Description="Sample read depth">
+##FORMAT=<ID=GQ,Number=1,Type=Integer,Description="Genotype quality">
+##FORMAT=<ID=AD,Number=R,Type=Integer,Description="Allelic depths for ref and alt alleles">
+##FORMAT=<ID=PL,Number=G,Type=Integer,Description="Phred-scaled genotype likelihoods">
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	SAMPLE01
+1	925952	rs1234567	G	A	50	PASS	DP=42;AF=0.5;DB	GT:DP:GQ:AD:PL	0/1:42:50:21,21:50,0,50
+1	1277533	rs2345678	C	T	99	PASS	DP=60;AF=0.25	GT:DP:GQ:AD:PL	0/1:60:99:45,15:30,0,99
+1	3638674	.	A	G	12	LowQual	DP=8;AF=0.375	GT:DP:GQ:AD:PL	0/1:8:12:5,3:12,0,40
+1	5935466	rs3456789	T	TC	75	PASS	DP=50;AF=0.5;DB	GT:DP:GQ:AD:PL	0/1:50:75:25,25:75,0,80
+2	158741	rs4567890	GCTA	G	88	PASS	DP=70;AF=0.3	GT:DP:GQ:AD:PL	0/1:70:88:49,21:88,0,120
+2	1527345	.	C	CTTTT	5	LowDepth	DP=4;AF=0.5	GT:DP:GQ:AD:PL	0/1:4:5:2,2:5,0,20
+2	29883610	rs5678901	A	T,C	95	PASS	DP=80;AF=0.4,0.1	GT:DP:GQ:AD:PL	1/2:80:95:5,32,8:95,30,0,80,20,100
+2	99401256	rs6789012	G	<DEL>	60	PASS	SVTYPE=DEL;END=99401850;DP=35;AF=0.5;CIPOS=-5,5	GT:DP:GQ:AD:PL	0/1:35:60:18,17:60,0,70
+X	2699625	rs7890123	T	A	99	PASS	DP=55;AF=0.5;DB	GT:DP:GQ:AD:PL	1/0:55:99:27,28:99,0,99
+X	153011012	.	C	G	35	LowQual	DP=15;AF=0.2	GT:DP:GQ:AD:PL	0/1:15:35:12,3:35,0,90

@@ -8,7 +8,7 @@ Description: labno2 helps you extract sample information stored in filenames.
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 Suggests: 
     knitr,
     rmarkdown,
@@ -18,8 +18,10 @@ Suggests:
 Config/testthat/edition: 3
 Imports: 
     dplyr,
+    janitor,
     readr,
     stringr,
-    tibble
+    tibble,
+    vcfR
 VignetteBuilder: knitr
 URL: https://joe-m-shaw.github.io/labno2/
