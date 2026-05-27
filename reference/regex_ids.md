@@ -17,5 +17,13 @@ A named list of regular expressions for different identifiers
 
 ``` r
 regex_ids()$labno_suffix
+#> $regex
 #> [1] "(^|\\D+)(\\d{8})(a|b|c|d|)(\\D+|$)"
+#> 
+#> $labno_group
+#> [1] 2
+#> 
+#> $suffix_group
+#> [1] 3
+#> 
 ```
