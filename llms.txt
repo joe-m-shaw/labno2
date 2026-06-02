@@ -32,6 +32,16 @@ worksheet (WS123456) and lab number (12345678) values.
 Where examples of patient names are required, I have used character
 names from novels by Leo Tolstoy (Anna Karenina, Pierre Bezukhov etc).
 
+## Use of Claude Code
+
+I have used Claude Code to;
+
+- Suggest code improvements
+
+- Generate initial function structure
+
+- Generate fake data for testing functions
+
 ## Example
 
 You can use `labno2` to extract sample identifiers stored in filenames,
@@ -65,10 +75,6 @@ b, c etc.
 
 extract_labno(filename)
 #> [1] "12345678"
-```
-
-``` r
-
 
 extract_suffix(filename)
 #> [1] "a"
@@ -98,6 +104,8 @@ mutate_ids(data)
 ## All functions
 
 - [`extract_id()`](extract_id.md) : Extract an identifier using regex
+- [`extract_igene_rno()`](extract_igene_rno.md) : Extract iGene R number
+  from a character string
 - [`extract_labno()`](extract_labno.md) : Extract lab number from a
   string
 - [`extract_suffix()`](extract_suffix.md) : Extract a sample replicate

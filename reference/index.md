@@ -3,6 +3,8 @@
 ## All functions
 
 - [`extract_id()`](extract_id.md) : Extract an identifier using regex
+- [`extract_igene_rno()`](extract_igene_rno.md) : Extract iGene R number
+  from a character string
 - [`extract_labno()`](extract_labno.md) : Extract lab number from a
   string
 - [`extract_suffix()`](extract_suffix.md) : Extract a sample replicate

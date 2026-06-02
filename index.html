@@ -78,6 +78,16 @@
 <p>Where examples of patient names are required, I have used character names from novels by Leo Tolstoy (Anna Karenina, Pierre Bezukhov etc).</p>
 </div>
 <div class="section level2">
+<h2 id="use-of-claude-code">Use of Claude Code<a class="anchor" aria-label="anchor" href="#use-of-claude-code"></a>
+</h2>
+<p>I have used Claude Code to;</p>
+<ul>
+<li><p>Suggest code improvements</p></li>
+<li><p>Generate initial function structure</p></li>
+<li><p>Generate fake data for testing functions</p></li>
+</ul>
+</div>
+<div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
 <p>You can use <code>labno2</code> to extract sample identifiers stored in filenames, which is useful when doing data projects involving multiple sample files.</p>
@@ -95,13 +105,12 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="reference/extract_labno.html">extract_labno</a></span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "12345678"</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
+<span><span class="co">#&gt; [1] "12345678"</span></span>
+<span></span>
 <span><span class="fu"><a href="reference/extract_suffix.html">extract_suffix</a></span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "a"</span></span></code></pre></div>
 <p><code>labno</code> also includes the <code>mutate_ids</code> function to extract all this information in one go from a dataframe column.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  <span class="st">"filename"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">filename</span><span class="op">)</span>,</span>
