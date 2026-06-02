@@ -4,7 +4,6 @@
 # labno2
 
 <!-- badges: start -->
-
 <!-- badges: end -->
 
 `labno2` is a package that makes it easier to work with sample
@@ -38,6 +37,16 @@ worksheet (WS123456) and lab number (12345678) values.
 Where examples of patient names are required, I have used character
 names from novels by Leo Tolstoy (Anna Karenina, Pierre Bezukhov etc).
 
+## Use of Claude Code
+
+I have used Claude Code to;
+
+- Suggest code improvements
+
+- Generate initial function structure
+
+- Generate fake data for testing functions
+
 ## Example
 
 You can use `labno2` to extract sample identifiers stored in filenames,
@@ -68,9 +77,6 @@ b, c etc.
 
 extract_labno(filename)
 #> [1] "12345678"
-```
-
-``` r
 
 extract_suffix(filename)
 #> [1] "a"

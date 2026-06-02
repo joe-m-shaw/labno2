@@ -1,0 +1,7 @@
+test_that("extract_igene_rno works with hyphen", {
+
+  expect_equal(extract_igene_rno("WS123456_R26-12AB"),
+               "R26-12AB")
+
+})
+

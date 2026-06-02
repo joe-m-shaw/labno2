@@ -17,9 +17,14 @@ regex_ids <- function(){
     "labno_suffix" = list(
       "regex" = "(^|\\D+)(\\d{8})(a|b|c|d|)(\\D+|$)",
       "labno_group" = 2,
-      "suffix_group" = 3)
+      "suffix_group" = 3),
+    "igene_rno" = list(
+      "regex" = "(R\\d{2}-.{4})",
+      "igene_rno_group" = 1
+    )
   )
 
   return(output_list)
 
 }
+
