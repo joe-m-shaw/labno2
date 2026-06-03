@@ -1,0 +1,59 @@
+{
+  "header": {
+    "json_exporter_version": 1.0,
+    "description": "This is test data, not patient data",
+    "front_page": []
+  },
+  "data": {
+    "summary": {
+      "quality_control": {
+        "table_1": [
+          {
+            "Summary_item": "Average length after trim",
+            "Value": 87.4,
+            "Threshold": 100
+          },
+          {
+            "Summary_item": "Percentage of reads mapped",
+            "Value": 96.2,
+            "Threshold": 95
+          },
+          {
+            "Summary_item": "Percentage of reads mapped in pairs",
+            "Value": 91.8,
+            "Threshold": 90
+          },
+          {
+            "Summary_item": "Average number of reads per UMI",
+            "Value": 1.3,
+            "Threshold": 1.2
+          },
+          {
+            "Summary_item": "signal_adjusted_noise_XX",
+            "Value": 0.43
+          },
+          {
+            "Summary_item": "predicted_ncc_XX",
+            "Value": 3.7
+          },
+          {
+            "Summary_item": "ploidy_regions_XX",
+            "Value": 62.5
+          },
+          {
+            "Summary_item": "signal_adjusted_noise_XY",
+            "Value": 0.51
+          },
+          {
+            "Summary_item": "predicted_ncc_XY",
+            "Value": 4.1
+          },
+          {
+            "Summary_item": "ploidy_regions_XY",
+            "Value": 58.3
+          }
+        ]
+      }
+    }
+  }
+}
