@@ -21,6 +21,7 @@ Imports:
     janitor,
     jsonlite,
     readr,
+    readxl,
     stringr,
     tibble,
     vcfR

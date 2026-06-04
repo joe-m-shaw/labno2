@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 `labno2` is a package that makes it easier to work with sample
 identifiers used at the North West Genomic Laboratory Hub.
 
-# What does it mean?
+## What does it mean?
 
 Each sample is given a DNA “lab number” which is stored as “labno” in
 sample databases.

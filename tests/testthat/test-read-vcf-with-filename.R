@@ -1,6 +1,6 @@
 test_that("reading a VCF works", {
 
-  df_vcf <- read_vcf_as_df("test_data/WS123456_12345678_test.vcf")
+  df_vcf <- read_vcf_with_filename("test_data/WS123456_12345678_test.vcf")
 
   expect_true(is.data.frame(df_vcf))
 

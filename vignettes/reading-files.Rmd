@@ -55,11 +55,11 @@ I want to get all the results into one dataframe, along with all the relevant id
 
 # The solution
 
-I can do this for a single file using the `read_csv_ids` function from `labno2`.
+I can do this for a single file using the `read_csv_with_filename` function from `labno2`.
 
 ```{r}
 
-read_csv_ids(files[1])
+read_csv_with_filename(files[1])
 
 ```
 
@@ -70,8 +70,9 @@ bind the data together.
 ```{r read-data}
 
 all_data <- files |> 
-  map(\(files) read_csv_ids(files)) |> 
+  map(\(files) read_csv_with_filename(files)) |> 
   list_rbind() |> 
+  mutate_ids() |> 
   mutate(gene_number = parse_number(gene))
 
 ```

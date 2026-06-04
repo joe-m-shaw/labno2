@@ -1,6 +1,6 @@
-test_that("read_json_as_df works", {
+test_that("read_json_with_filename works", {
 
-  df_json <- read_json_as_df("test_data/WS123456_12345678_test.json")
+  df_json <- read_json_with_filename("test_data/WS123456_12345678_test.json")
 
   expect_true(is.data.frame(df_json))
 
