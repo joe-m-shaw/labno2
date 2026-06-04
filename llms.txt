@@ -112,14 +112,18 @@ mutate_ids(data)
   suffix from a string
 - [`extract_worksheet()`](extract_worksheet.md) : Extract worksheet from
   a character string
+- [`mutate_filename()`](mutate_filename.md) : Add filename and filepath
+  to a dataframe
 - [`mutate_ids()`](mutate_ids.md) : Add sample identifiers from filename
   as additional data columns
-- [`read_csv_ids()`](read_csv_ids.md) : Read a csv file and add
-  identifiers
-- [`read_json_as_df()`](read_json_as_df.md) : Read a table from a JSON
-  file as a dataframe
-- [`read_vcf_as_df()`](read_vcf_as_df.md) : Read a VCF file into R as a
-  data frame
+- [`read_csv_with_filename()`](read_csv_with_filename.md) : Read a csv
+  file and add the filename as a column
+- [`read_excel_with_filename()`](read_excel_with_filename.md) : Read an
+  Excel file with additional columns for filename
+- [`read_json_with_filename()`](read_json_with_filename.md) : Read a
+  table from a JSON file as a dataframe
+- [`read_vcf_with_filename()`](read_vcf_with_filename.md) : Read a VCF
+  file into R as a data frame
 - [`regex_ids()`](regex_ids.md) : Regular expressions for sample
   identifiers
 

@@ -116,11 +116,12 @@ relevant identifiers.</p>
 <div class="section level2">
 <h2 id="the-solution">The solution<a class="anchor" aria-label="anchor" href="#the-solution"></a>
 </h2>
-<p>I can do this for a single file using the <code>read_csv_ids</code>
-function from <code>labno2</code>.</p>
+<p>I can do this for a single file using the
+<code>read_csv_with_filename</code> function from
+<code>labno2</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="fu"><a href="../reference/read_csv_ids.html">read_csv_ids</a></span><span class="op">(</span><span class="va">files</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/read_csv_with_filename.html">read_csv_with_filename</a></span><span class="op">(</span><span class="va">files</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">10</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">2</span></span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span></span>
@@ -129,27 +130,27 @@ function from <code>labno2</code>.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 9</span></span></span>
-<span><span class="co">#&gt;    gene   score filepath            filename labno suffix worksheet labno_suffix</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> gene1  97.7  data//WS123456_123… WS12345… 1234… a      WS123456  12345678a   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> gene2  11.3  data//WS123456_123… WS12345… 1234… a      WS123456  12345678a   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> gene3  98.9  data//WS123456_123… WS12345… 1234… a      WS123456  12345678a   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> gene4  64.0  data//WS123456_123… WS12345… 1234… a      WS123456  12345678a   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> gene5   3.49 data//WS123456_123… WS12345… 1234… a      WS123456  12345678a   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> gene6  11.4  data//WS123456_123… WS12345… 1234… a      WS123456  12345678a   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> gene7  86.8  data//WS123456_123… WS12345… 1234… a      WS123456  12345678a   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> gene8  13.8  data//WS123456_123… WS12345… 1234… a      WS123456  12345678a   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> gene9  49.7  data//WS123456_123… WS12345… 1234… a      WS123456  12345678a   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> gene10 10.6  data//WS123456_123… WS12345… 1234… a      WS123456  12345678a   </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1 more variable: labno_suffix_worksheet &lt;chr&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 4</span></span></span>
+<span><span class="co">#&gt;    gene   score filepath                                    filename            </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> gene1  97.7  data//WS123456_12345678a_PierreBEZUKHOV.csv WS123456_12345678a_…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> gene2  11.3  data//WS123456_12345678a_PierreBEZUKHOV.csv WS123456_12345678a_…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> gene3  98.9  data//WS123456_12345678a_PierreBEZUKHOV.csv WS123456_12345678a_…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> gene4  64.0  data//WS123456_12345678a_PierreBEZUKHOV.csv WS123456_12345678a_…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> gene5   3.49 data//WS123456_12345678a_PierreBEZUKHOV.csv WS123456_12345678a_…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> gene6  11.4  data//WS123456_12345678a_PierreBEZUKHOV.csv WS123456_12345678a_…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> gene7  86.8  data//WS123456_12345678a_PierreBEZUKHOV.csv WS123456_12345678a_…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> gene8  13.8  data//WS123456_12345678a_PierreBEZUKHOV.csv WS123456_12345678a_…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> gene9  49.7  data//WS123456_12345678a_PierreBEZUKHOV.csv WS123456_12345678a_…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> gene10 10.6  data//WS123456_12345678a_PierreBEZUKHOV.csv WS123456_12345678a_…</span></span></code></pre></div>
 <p>Using <code>map</code> from <code>purrr</code> I can then iterate
 this function over the file list and bind the data together.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">all_data</span> <span class="op">&lt;-</span> <span class="va">files</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">files</span><span class="op">)</span> <span class="fu"><a href="../reference/read_csv_ids.html">read_csv_ids</a></span><span class="op">(</span><span class="va">files</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">files</span><span class="op">)</span> <span class="fu"><a href="../reference/read_csv_with_filename.html">read_csv_with_filename</a></span><span class="op">(</span><span class="va">files</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="../reference/mutate_ids.html">mutate_ids</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>gene_number <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_number.html" class="external-link">parse_number</a></span><span class="op">(</span><span class="va">gene</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">10</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">2</span></span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span></span>

@@ -61,13 +61,13 @@ relevant identifiers.
 
 ## The solution
 
-I can do this for a single file using the `read_csv_ids` function from
-`labno2`.
+I can do this for a single file using the `read_csv_with_filename`
+function from `labno2`.
 
 ``` r
 
 
-read_csv_ids(files[1])
+read_csv_with_filename(files[1])
 #> Rows: 10 Columns: 2
 #> ── Column specification ────────────────────────────────────────────────────────
 #> Delimiter: ","
@@ -76,20 +76,19 @@ read_csv_ids(files[1])
 #> 
 #> ℹ Use `spec()` to retrieve the full column specification for this data.
 #> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-#> # A tibble: 10 × 9
-#>    gene   score filepath            filename labno suffix worksheet labno_suffix
-#>    <chr>  <dbl> <chr>               <chr>    <chr> <chr>  <chr>     <chr>       
-#>  1 gene1  97.7  data//WS123456_123… WS12345… 1234… a      WS123456  12345678a   
-#>  2 gene2  11.3  data//WS123456_123… WS12345… 1234… a      WS123456  12345678a   
-#>  3 gene3  98.9  data//WS123456_123… WS12345… 1234… a      WS123456  12345678a   
-#>  4 gene4  64.0  data//WS123456_123… WS12345… 1234… a      WS123456  12345678a   
-#>  5 gene5   3.49 data//WS123456_123… WS12345… 1234… a      WS123456  12345678a   
-#>  6 gene6  11.4  data//WS123456_123… WS12345… 1234… a      WS123456  12345678a   
-#>  7 gene7  86.8  data//WS123456_123… WS12345… 1234… a      WS123456  12345678a   
-#>  8 gene8  13.8  data//WS123456_123… WS12345… 1234… a      WS123456  12345678a   
-#>  9 gene9  49.7  data//WS123456_123… WS12345… 1234… a      WS123456  12345678a   
-#> 10 gene10 10.6  data//WS123456_123… WS12345… 1234… a      WS123456  12345678a   
-#> # ℹ 1 more variable: labno_suffix_worksheet <chr>
+#> # A tibble: 10 × 4
+#>    gene   score filepath                                    filename            
+#>    <chr>  <dbl> <chr>                                       <chr>               
+#>  1 gene1  97.7  data//WS123456_12345678a_PierreBEZUKHOV.csv WS123456_12345678a_…
+#>  2 gene2  11.3  data//WS123456_12345678a_PierreBEZUKHOV.csv WS123456_12345678a_…
+#>  3 gene3  98.9  data//WS123456_12345678a_PierreBEZUKHOV.csv WS123456_12345678a_…
+#>  4 gene4  64.0  data//WS123456_12345678a_PierreBEZUKHOV.csv WS123456_12345678a_…
+#>  5 gene5   3.49 data//WS123456_12345678a_PierreBEZUKHOV.csv WS123456_12345678a_…
+#>  6 gene6  11.4  data//WS123456_12345678a_PierreBEZUKHOV.csv WS123456_12345678a_…
+#>  7 gene7  86.8  data//WS123456_12345678a_PierreBEZUKHOV.csv WS123456_12345678a_…
+#>  8 gene8  13.8  data//WS123456_12345678a_PierreBEZUKHOV.csv WS123456_12345678a_…
+#>  9 gene9  49.7  data//WS123456_12345678a_PierreBEZUKHOV.csv WS123456_12345678a_…
+#> 10 gene10 10.6  data//WS123456_12345678a_PierreBEZUKHOV.csv WS123456_12345678a_…
 ```
 
 Using `map` from `purrr` I can then iterate this function over the file
@@ -99,8 +98,9 @@ list and bind the data together.
 
 
 all_data <- files |> 
-  map(\(files) read_csv_ids(files)) |> 
+  map(\(files) read_csv_with_filename(files)) |> 
   list_rbind() |> 
+  mutate_ids() |> 
   mutate(gene_number = parse_number(gene))
 #> Rows: 10 Columns: 2
 #> ── Column specification ────────────────────────────────────────────────────────
