@@ -24,6 +24,7 @@ Imports:
     readxl,
     stringr,
     tibble,
+    tidyr,
     vcfR
 VignetteBuilder: knitr
 URL: https://joe-m-shaw.github.io/labno2/

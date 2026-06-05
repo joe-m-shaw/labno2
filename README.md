@@ -6,10 +6,17 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-`labno2` is a package that makes it easier to work with sample
-identifiers used at the North West Genomic Laboratory Hub.
+`labno2` is a package for exploratory data analysis at the North West
+Genomic Laboratory Hub. The scope of `labno2` evolves according to what
+I need, but at it’s core it is a series of functions to help explore
+genetic data reproducibly and at scale.
 
-# What does it mean?
+## Who is this for?
+
+`labno2` is intended only for internal usage, but is publicly available
+on Github.
+
+## Why is it called `labno2`?
 
 Each sample is given a DNA “lab number” which is stored as “labno” in
 sample databases.
