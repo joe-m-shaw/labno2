@@ -12,12 +12,16 @@
 <url><loc>/reference/extract_suffix.html</loc></url>
 <url><loc>/reference/extract_worksheet.html</loc></url>
 <url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/join_clc_msi_locus_tables.html</loc></url>
+<url><loc>/reference/mutate_clc_msi_row_numbers.html</loc></url>
 <url><loc>/reference/mutate_filename.html</loc></url>
 <url><loc>/reference/mutate_ids.html</loc></url>
+<url><loc>/reference/read_clc_msi_locus_section.html</loc></url>
 <url><loc>/reference/read_csv_with_filename.html</loc></url>
 <url><loc>/reference/read_excel_with_filename.html</loc></url>
 <url><loc>/reference/read_json_with_filename.html</loc></url>
 <url><loc>/reference/read_vcf_with_filename.html</loc></url>
 <url><loc>/reference/regex_ids.html</loc></url>
+<url><loc>/reference/tidy_clc_msi_locus_tables.html</loc></url>
 </urlset>
 

@@ -1,9 +1,16 @@
 # labno2
 
-`labno2` is a package that makes it easier to work with sample
-identifiers used at the North West Genomic Laboratory Hub.
+`labno2` is a package for exploratory data analysis at the North West
+Genomic Laboratory Hub. The scope of `labno2` evolves according to what
+I need, but at it’s core it is a series of functions to help explore
+genetic data reproducibly and at scale.
 
-# What does it mean?
+## Who is this for?
+
+`labno2` is intended only for internal usage, but is publicly available
+on Github.
+
+## Why is it called `labno2`?
 
 Each sample is given a DNA “lab number” which is stored as “labno” in
 sample databases.
@@ -112,10 +119,16 @@ mutate_ids(data)
   suffix from a string
 - [`extract_worksheet()`](extract_worksheet.md) : Extract worksheet from
   a character string
+- [`join_clc_msi_locus_tables()`](join_clc_msi_locus_tables.md) : Join
+  information in CLC MSI Report locus section
+- [`mutate_clc_msi_row_numbers()`](mutate_clc_msi_row_numbers.md) : Add
+  row numbers to the locus table section of a CLC MSI Report
 - [`mutate_filename()`](mutate_filename.md) : Add filename and filepath
   to a dataframe
 - [`mutate_ids()`](mutate_ids.md) : Add sample identifiers from filename
   as additional data columns
+- [`read_clc_msi_locus_section()`](read_clc_msi_locus_section.md) : Read
+  the section of a CLC MSI Report Excel which contains locus lengths
 - [`read_csv_with_filename()`](read_csv_with_filename.md) : Read a csv
   file and add the filename as a column
 - [`read_excel_with_filename()`](read_excel_with_filename.md) : Read an
@@ -126,6 +139,7 @@ mutate_ids(data)
   file into R as a data frame
 - [`regex_ids()`](regex_ids.md) : Regular expressions for sample
   identifiers
+- [`tidy_clc_msi_locus_tables()`](tidy_clc_msi_locus_tables.md) : Title
 
 # Articles
 
