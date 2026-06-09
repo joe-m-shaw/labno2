@@ -2,4 +2,4 @@
 
 ### All vignettes
 
-- [Reading files with labno2](reading-files.md):
+- [Exploratory data analysis with labtools](reading-files.md):

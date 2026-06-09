@@ -1,8 +1,8 @@
-# Reading files with labno2
+# Exploratory data analysis with labtools
 
 ``` r
 
-library(labno2)
+library(labtools)
 library(readr)
 library(purrr)
 library(ggplot2)
@@ -62,7 +62,7 @@ relevant identifiers.
 ## The solution
 
 I can do this for a single file using the `read_csv_with_filename`
-function from `labno2`.
+function from `labtools`.
 
 ``` r
 
@@ -206,19 +206,19 @@ Then I can explore this collated data using `ggplot2`.
 
 ## The rationale
 
-`labno2` is designed to help me do exploratory data analysis on multiple
-files quickly and reproducibly. It is built around `tidyverse` packages
-including `stringr`, `readr` and `dplyr`.
+`labtools` is designed to help me do exploratory data analysis on
+multiple files quickly and reproducibly. It is built around `tidyverse`
+packages including `stringr`, `readr` and `dplyr`.
 
-`labno2` aims to include functionality which is shared across multiple
+`labtools` aims to include functionality which is shared across multiple
 projects that I do. This is shown in the above example: a common problem
 is collating data from files which include identifiers in the filenames
 with a consistent format for worksheet, lab number and suffix.
 
 ## What about extracting patient names?
 
-There is currently no function for extracting patient names in `labno2`
-for the following reasons:
+There is currently no function for extracting patient names in
+`labtools` for the following reasons:
 
 - **Patient names are not always included in filenames.** If data is
   analysed on the cloud, then patient names are removed from filenames,

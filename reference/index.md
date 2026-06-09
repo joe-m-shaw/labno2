@@ -31,4 +31,5 @@
   file into R as a data frame
 - [`regex_ids()`](regex_ids.md) : Regular expressions for sample
   identifiers
-- [`tidy_clc_msi_locus_tables()`](tidy_clc_msi_locus_tables.md) : Title
+- [`tidy_clc_msi_locus_tables()`](tidy_clc_msi_locus_tables.md) :
+  Wrangle locus length tables from CLC MSI Excels into a tidy dataframe
