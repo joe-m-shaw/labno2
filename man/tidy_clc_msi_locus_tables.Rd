@@ -2,13 +2,30 @@
 % Please edit documentation in R/tidy-clc-msi-locus-tables.R
 \name{tidy_clc_msi_locus_tables}
 \alias{tidy_clc_msi_locus_tables}
-\title{Title}
+\title{Wrangle locus length tables from CLC MSI Excels into a tidy dataframe}
 \usage{
 tidy_clc_msi_locus_tables(filepath)
 }
 \arguments{
-\item{filepath}{}
+\item{filepath}{The full filepath to the CLC MSI Excel}
+}
+\value{
+A single tidy dataframe of all lengths for all loci in the report.
 }
 \description{
-Title
+The "Detect Microsatellite Instability" (MSI) tool in CLC produces an Excel
+output with multiple tables of allele lengths for different MSI loci.
+These tables are positioned vertically in a non-tidy format which is hard
+to work with.
+This function performs the following steps:
+}
+\details{
+\itemize{
+\item First it finds the relevant section of the Excel
+(\code{read_clc_msi_locus_section})
+\item Then it identifiers different parts of the report based on row numbers
+(\code{mutate_clc_msi_row_numbers})
+\item The different sections of data are joined to each other
+(\code{join_clc_msi_locus_tables}) in a tidy format
+}
 }

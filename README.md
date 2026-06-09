@@ -1,34 +1,25 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# labno2
+# labtools
 
 <!-- badges: start -->
+
 <!-- badges: end -->
 
-`labno2` is a package for exploratory data analysis at the North West
-Genomic Laboratory Hub. The scope of `labno2` evolves according to what
-I need, but at it’s core it is a series of functions to help explore
-genetic data reproducibly and at scale.
-
-## Who is this for?
-
-`labno2` is intended only for internal usage, but is publicly available
-on Github.
-
-## Why is it called `labno2`?
-
-Each sample is given a DNA “lab number” which is stored as “labno” in
-sample databases.
+`labtools` is a package for exploratory data analysis at the North West
+Genomic Laboratory Hub. `labtools` aims to be a centralised, public
+repository of functions to help explore genetic data in reproducibly and
+at scale in lab development projects.
 
 ## Installation
 
-You can install the development version of labno2 from
+You can install the development version of labtools from
 [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("pak")
-pak::pak("joe-m-shaw/labno2")
+pak::pak("joe-m-shaw/labtools")
 ```
 
 ## Information Governance
@@ -44,43 +35,20 @@ worksheet (WS123456) and lab number (12345678) values.
 Where examples of patient names are required, I have used character
 names from novels by Leo Tolstoy (Anna Karenina, Pierre Bezukhov etc).
 
-## Use of Claude Code
-
-I have used Claude Code to;
-
-- Suggest code improvements
-
-- Generate initial function structure
-
-- Generate fake data for testing functions
-
 ## Example
 
-You can use `labno2` to extract sample identifiers stored in filenames,
-which is useful when doing data projects involving multiple sample
-files.
+You can use `labtools` to extract sample identifiers stored in
+filenames, which is useful when doing data projects involving multiple
+sample files.
 
 ``` r
 
-library(labno2)
+library(labtools)
 
 filename <- "WS123456_12345678a"
-```
-
-Using `labno2`, you can quickly extract the worksheet number that the
-sample was tested on
-
-``` r
 
 extract_worksheet(filename)
 #> [1] "WS123456"
-```
-
-You can extract the lab number, and its suffix (if present). Samples
-which are tested multiple times per worksheet will have suffixes of a,
-b, c etc.
-
-``` r
 
 extract_labno(filename)
 #> [1] "12345678"
@@ -89,20 +57,5 @@ extract_suffix(filename)
 #> [1] "a"
 ```
 
-`labno` also includes the `mutate_ids` function to extract all this
-information in one go from a dataframe column.
-
-``` r
-
-data <- data.frame(
-  "filename" = c(filename),
-  "gene_result" = c(1)
-)
-
-mutate_ids(data)
-#> # A tibble: 1 × 7
-#>   filename           gene_result labno    suffix worksheet labno_suffix
-#>   <chr>                    <dbl> <chr>    <chr>  <chr>     <chr>       
-#> 1 WS123456_12345678a           1 12345678 a      WS123456  12345678a   
-#> # ℹ 1 more variable: labno_suffix_worksheet <chr>
-```
+A more detailed example is given in the “Reading files with labtools”
+vignette.

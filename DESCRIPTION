@@ -1,14 +1,13 @@
-Package: labno2
-Title: Identify DNA Samples for Exploratory Data Analysis
+Package: labtools
+Title: Custom Tools for Exploratory Data Analysis
 Version: 0.0.0.9000
 Authors@R: 
     person("Joe M.", "Shaw", , "joseph.shaw2@mft.nhs.uk", role = c("aut", "cre"),
     comment = c(ORCID = "0000-0002-5089-751X"))
-Description: labno2 helps you extract sample information stored in filenames.
+Description: labtools is a collection of functions for performing exploratory data analysis in development projects at the North West Genomic Laboratory Hub in Manchester. 
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.3
 Suggests: 
     knitr,
     rmarkdown,
@@ -27,4 +26,5 @@ Imports:
     tidyr,
     vcfR
 VignetteBuilder: knitr
-URL: https://joe-m-shaw.github.io/labno2/
+URL: https://joe-m-shaw.github.io/labtools/
+Config/roxygen2/version: 8.0.0

@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
-library(labno2)
+library(labtools)
 
-test_check("labno2")
+test_check("labtools")
