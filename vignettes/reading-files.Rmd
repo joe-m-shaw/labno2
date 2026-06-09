@@ -2,7 +2,7 @@
 title: "Exploratory data analysis with labtools"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{reading-files}
+  %\VignetteIndexEntry{Exploratory data analysis with labtools}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, include = FALSE}
 library(labtools)
 library(readr)
 library(purrr)
@@ -42,7 +42,7 @@ Each file consists of results for different genes.
 For the purpose of this example, I have randomly generated a "score" for each gene. 
 This is not real clinical data.
 
-```{r example-file, echo=FALSE}
+```{r example-file, echo=FALSE, message = FALSE}
 
 file1 <- read_csv(file = files[1],
                   show_col_types = FALSE)
@@ -57,7 +57,7 @@ I want to get all the results into one dataframe, along with all the relevant id
 
 I can do this for a single file using the `read_csv_with_filename` function from `labtools`.
 
-```{r}
+```{r, include = TRUE, message = FALSE}
 
 read_csv_with_filename(files[1])
 
@@ -67,13 +67,12 @@ read_csv_with_filename(files[1])
 Using `map` from `purrr` I can then iterate this function over the file list and 
 bind the data together.
 
-```{r read-data}
+```{r read-data, include = TRUE, message = FALSE}
 
 all_data <- files |> 
   map(\(files) read_csv_with_filename(files)) |> 
   list_rbind() |> 
-  mutate_ids() |> 
-  mutate(gene_number = parse_number(gene))
+  mutate_ids() 
 
 ```
 
@@ -82,7 +81,7 @@ correct sample identifiers.
 
 ```{r data, echo = FALSE}
 
-knitr::kable(all_data)
+knitr::kable(head(all_data, 5))
 
 ```
 
@@ -90,7 +89,9 @@ Then I can explore this collated data using `ggplot2`.
 
 ```{r plots, echo = FALSE, width = 6}
 
-gene_plot <- ggplot(all_data, aes(x = gene_number, y = score)) +
+gene_plot <- all_data |> 
+  mutate(gene_number = parse_number(gene)) |> 
+  ggplot(aes(x = gene_number, y = score)) +
   geom_point(shape = 21, size = 2, aes(fill = suffix)) +
   theme_bw()+
   scale_x_continuous(limits = c(1, 10),
