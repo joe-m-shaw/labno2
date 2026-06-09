@@ -1,22 +1,5 @@
 # Exploratory data analysis with labtools
 
-``` r
-
-library(labtools)
-library(readr)
-library(purrr)
-library(ggplot2)
-library(dplyr)
-#> 
-#> Attaching package: 'dplyr'
-#> The following objects are masked from 'package:stats':
-#> 
-#>     filter, lag
-#> The following objects are masked from 'package:base':
-#> 
-#>     intersect, setdiff, setequal, union
-```
-
 ## The problem
 
 There are multiple files with genetic results in, and the sample
@@ -68,14 +51,6 @@ function from `labtools`.
 
 
 read_csv_with_filename(files[1])
-#> Rows: 10 Columns: 2
-#> ── Column specification ────────────────────────────────────────────────────────
-#> Delimiter: ","
-#> chr (1): gene
-#> dbl (1): score
-#> 
-#> ℹ Use `spec()` to retrieve the full column specification for this data.
-#> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 #> # A tibble: 10 × 4
 #>    gene   score filepath                                    filename            
 #>    <chr>  <dbl> <chr>                                       <chr>               
@@ -100,105 +75,19 @@ list and bind the data together.
 all_data <- files |> 
   map(\(files) read_csv_with_filename(files)) |> 
   list_rbind() |> 
-  mutate_ids() |> 
-  mutate(gene_number = parse_number(gene))
-#> Rows: 10 Columns: 2
-#> ── Column specification ────────────────────────────────────────────────────────
-#> Delimiter: ","
-#> chr (1): gene
-#> dbl (1): score
-#> 
-#> ℹ Use `spec()` to retrieve the full column specification for this data.
-#> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-#> Rows: 10 Columns: 2
-#> ── Column specification ────────────────────────────────────────────────────────
-#> Delimiter: ","
-#> chr (1): gene
-#> dbl (1): score
-#> 
-#> ℹ Use `spec()` to retrieve the full column specification for this data.
-#> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-#> Rows: 10 Columns: 2
-#> ── Column specification ────────────────────────────────────────────────────────
-#> Delimiter: ","
-#> chr (1): gene
-#> dbl (1): score
-#> 
-#> ℹ Use `spec()` to retrieve the full column specification for this data.
-#> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-#> Rows: 10 Columns: 2
-#> ── Column specification ────────────────────────────────────────────────────────
-#> Delimiter: ","
-#> chr (1): gene
-#> dbl (1): score
-#> 
-#> ℹ Use `spec()` to retrieve the full column specification for this data.
-#> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-#> Rows: 10 Columns: 2
-#> ── Column specification ────────────────────────────────────────────────────────
-#> Delimiter: ","
-#> chr (1): gene
-#> dbl (1): score
-#> 
-#> ℹ Use `spec()` to retrieve the full column specification for this data.
-#> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+  mutate_ids() 
 ```
 
 This gives me the data in a single dataframe with each row annotated
 with the correct sample identifiers.
 
-| gene | score | filepath | filename | labno | suffix | worksheet | labno_suffix | labno_suffix_worksheet | gene_number |
-|:---|---:|:---|:---|:---|:---|:---|:---|:---|---:|
-| gene1 | 97.6955141 | data//WS123456_12345678a_PierreBEZUKHOV.csv | WS123456_12345678a_PierreBEZUKHOV.csv | 12345678 | a | WS123456 | 12345678a | 12345678a_WS123456 | 1 |
-| gene2 | 11.2687355 | data//WS123456_12345678a_PierreBEZUKHOV.csv | WS123456_12345678a_PierreBEZUKHOV.csv | 12345678 | a | WS123456 | 12345678a | 12345678a_WS123456 | 2 |
-| gene3 | 98.8593290 | data//WS123456_12345678a_PierreBEZUKHOV.csv | WS123456_12345678a_PierreBEZUKHOV.csv | 12345678 | a | WS123456 | 12345678a | 12345678a_WS123456 | 3 |
-| gene4 | 64.0114902 | data//WS123456_12345678a_PierreBEZUKHOV.csv | WS123456_12345678a_PierreBEZUKHOV.csv | 12345678 | a | WS123456 | 12345678a | 12345678a_WS123456 | 4 |
-| gene5 | 3.4885046 | data//WS123456_12345678a_PierreBEZUKHOV.csv | WS123456_12345678a_PierreBEZUKHOV.csv | 12345678 | a | WS123456 | 12345678a | 12345678a_WS123456 | 5 |
-| gene6 | 11.3642443 | data//WS123456_12345678a_PierreBEZUKHOV.csv | WS123456_12345678a_PierreBEZUKHOV.csv | 12345678 | a | WS123456 | 12345678a | 12345678a_WS123456 | 6 |
-| gene7 | 86.7547998 | data//WS123456_12345678a_PierreBEZUKHOV.csv | WS123456_12345678a_PierreBEZUKHOV.csv | 12345678 | a | WS123456 | 12345678a | 12345678a_WS123456 | 7 |
-| gene8 | 13.8269989 | data//WS123456_12345678a_PierreBEZUKHOV.csv | WS123456_12345678a_PierreBEZUKHOV.csv | 12345678 | a | WS123456 | 12345678a | 12345678a_WS123456 | 8 |
-| gene9 | 49.7064066 | data//WS123456_12345678a_PierreBEZUKHOV.csv | WS123456_12345678a_PierreBEZUKHOV.csv | 12345678 | a | WS123456 | 12345678a | 12345678a_WS123456 | 9 |
-| gene10 | 10.6104016 | data//WS123456_12345678a_PierreBEZUKHOV.csv | WS123456_12345678a_PierreBEZUKHOV.csv | 12345678 | a | WS123456 | 12345678a | 12345678a_WS123456 | 10 |
-| gene1 | 5.4439993 | data//WS123456_12345678b_PierreBEZUKHOV.csv | WS123456_12345678b_PierreBEZUKHOV.csv | 12345678 | b | WS123456 | 12345678b | 12345678b_WS123456 | 1 |
-| gene2 | 72.0719737 | data//WS123456_12345678b_PierreBEZUKHOV.csv | WS123456_12345678b_PierreBEZUKHOV.csv | 12345678 | b | WS123456 | 12345678b | 12345678b_WS123456 | 2 |
-| gene3 | 60.4684200 | data//WS123456_12345678b_PierreBEZUKHOV.csv | WS123456_12345678b_PierreBEZUKHOV.csv | 12345678 | b | WS123456 | 12345678b | 12345678b_WS123456 | 3 |
-| gene4 | 79.2336205 | data//WS123456_12345678b_PierreBEZUKHOV.csv | WS123456_12345678b_PierreBEZUKHOV.csv | 12345678 | b | WS123456 | 12345678b | 12345678b_WS123456 | 4 |
-| gene5 | 24.4005622 | data//WS123456_12345678b_PierreBEZUKHOV.csv | WS123456_12345678b_PierreBEZUKHOV.csv | 12345678 | b | WS123456 | 12345678b | 12345678b_WS123456 | 5 |
-| gene6 | 11.0944414 | data//WS123456_12345678b_PierreBEZUKHOV.csv | WS123456_12345678b_PierreBEZUKHOV.csv | 12345678 | b | WS123456 | 12345678b | 12345678b_WS123456 | 6 |
-| gene7 | 3.3582193 | data//WS123456_12345678b_PierreBEZUKHOV.csv | WS123456_12345678b_PierreBEZUKHOV.csv | 12345678 | b | WS123456 | 12345678b | 12345678b_WS123456 | 7 |
-| gene8 | 98.3774984 | data//WS123456_12345678b_PierreBEZUKHOV.csv | WS123456_12345678b_PierreBEZUKHOV.csv | 12345678 | b | WS123456 | 12345678b | 12345678b_WS123456 | 8 |
-| gene9 | 55.4686784 | data//WS123456_12345678b_PierreBEZUKHOV.csv | WS123456_12345678b_PierreBEZUKHOV.csv | 12345678 | b | WS123456 | 12345678b | 12345678b_WS123456 | 9 |
-| gene10 | 80.9327019 | data//WS123456_12345678b_PierreBEZUKHOV.csv | WS123456_12345678b_PierreBEZUKHOV.csv | 12345678 | b | WS123456 | 12345678b | 12345678b_WS123456 | 10 |
-| gene1 | 94.2702363 | data//WS123456_12345678c_PierreBEZUKHOV.csv | WS123456_12345678c_PierreBEZUKHOV.csv | 12345678 | c | WS123456 | 12345678c | 12345678c_WS123456 | 1 |
-| gene2 | 84.8811300 | data//WS123456_12345678c_PierreBEZUKHOV.csv | WS123456_12345678c_PierreBEZUKHOV.csv | 12345678 | c | WS123456 | 12345678c | 12345678c_WS123456 | 2 |
-| gene3 | 89.4712796 | data//WS123456_12345678c_PierreBEZUKHOV.csv | WS123456_12345678c_PierreBEZUKHOV.csv | 12345678 | c | WS123456 | 12345678c | 12345678c_WS123456 | 3 |
-| gene4 | 62.9010040 | data//WS123456_12345678c_PierreBEZUKHOV.csv | WS123456_12345678c_PierreBEZUKHOV.csv | 12345678 | c | WS123456 | 12345678c | 12345678c_WS123456 | 4 |
-| gene5 | 50.5924463 | data//WS123456_12345678c_PierreBEZUKHOV.csv | WS123456_12345678c_PierreBEZUKHOV.csv | 12345678 | c | WS123456 | 12345678c | 12345678c_WS123456 | 5 |
-| gene6 | 25.2354199 | data//WS123456_12345678c_PierreBEZUKHOV.csv | WS123456_12345678c_PierreBEZUKHOV.csv | 12345678 | c | WS123456 | 12345678c | 12345678c_WS123456 | 6 |
-| gene7 | 67.6015973 | data//WS123456_12345678c_PierreBEZUKHOV.csv | WS123456_12345678c_PierreBEZUKHOV.csv | 12345678 | c | WS123456 | 12345678c | 12345678c_WS123456 | 7 |
-| gene8 | 14.0432803 | data//WS123456_12345678c_PierreBEZUKHOV.csv | WS123456_12345678c_PierreBEZUKHOV.csv | 12345678 | c | WS123456 | 12345678c | 12345678c_WS123456 | 8 |
-| gene9 | 75.8114634 | data//WS123456_12345678c_PierreBEZUKHOV.csv | WS123456_12345678c_PierreBEZUKHOV.csv | 12345678 | c | WS123456 | 12345678c | 12345678c_WS123456 | 9 |
-| gene10 | 95.3160182 | data//WS123456_12345678c_PierreBEZUKHOV.csv | WS123456_12345678c_PierreBEZUKHOV.csv | 12345678 | c | WS123456 | 12345678c | 12345678c_WS123456 | 10 |
-| gene1 | 50.4452151 | data//WS123456_23456789_AnnaKARENINA.csv | WS123456_23456789_AnnaKARENINA.csv | 23456789 |  | WS123456 | 23456789 | 23456789_WS123456 | 1 |
-| gene2 | 94.4651708 | data//WS123456_23456789_AnnaKARENINA.csv | WS123456_23456789_AnnaKARENINA.csv | 23456789 |  | WS123456 | 23456789 | 23456789_WS123456 | 2 |
-| gene3 | 36.3450093 | data//WS123456_23456789_AnnaKARENINA.csv | WS123456_23456789_AnnaKARENINA.csv | 23456789 |  | WS123456 | 23456789 | 23456789_WS123456 | 3 |
-| gene4 | 1.7642395 | data//WS123456_23456789_AnnaKARENINA.csv | WS123456_23456789_AnnaKARENINA.csv | 23456789 |  | WS123456 | 23456789 | 23456789_WS123456 | 4 |
-| gene5 | 89.2965208 | data//WS123456_23456789_AnnaKARENINA.csv | WS123456_23456789_AnnaKARENINA.csv | 23456789 |  | WS123456 | 23456789 | 23456789_WS123456 | 5 |
-| gene6 | 70.4437311 | data//WS123456_23456789_AnnaKARENINA.csv | WS123456_23456789_AnnaKARENINA.csv | 23456789 |  | WS123456 | 23456789 | 23456789_WS123456 | 6 |
-| gene7 | 42.9037774 | data//WS123456_23456789_AnnaKARENINA.csv | WS123456_23456789_AnnaKARENINA.csv | 23456789 |  | WS123456 | 23456789 | 23456789_WS123456 | 7 |
-| gene8 | 60.4224573 | data//WS123456_23456789_AnnaKARENINA.csv | WS123456_23456789_AnnaKARENINA.csv | 23456789 |  | WS123456 | 23456789 | 23456789_WS123456 | 8 |
-| gene9 | 88.9575026 | data//WS123456_23456789_AnnaKARENINA.csv | WS123456_23456789_AnnaKARENINA.csv | 23456789 |  | WS123456 | 23456789 | 23456789_WS123456 | 9 |
-| gene10 | 0.5565599 | data//WS123456_23456789_AnnaKARENINA.csv | WS123456_23456789_AnnaKARENINA.csv | 23456789 |  | WS123456 | 23456789 | 23456789_WS123456 | 10 |
-| gene1 | 43.3481782 | data//WS123456_34567890_IvanILYCH.csv | WS123456_34567890_IvanILYCH.csv | 34567890 |  | WS123456 | 34567890 | 34567890_WS123456 | 1 |
-| gene2 | 25.9921850 | data//WS123456_34567890_IvanILYCH.csv | WS123456_34567890_IvanILYCH.csv | 34567890 |  | WS123456 | 34567890 | 34567890_WS123456 | 2 |
-| gene3 | 11.1211967 | data//WS123456_34567890_IvanILYCH.csv | WS123456_34567890_IvanILYCH.csv | 34567890 |  | WS123456 | 34567890 | 34567890_WS123456 | 3 |
-| gene4 | 34.3106907 | data//WS123456_34567890_IvanILYCH.csv | WS123456_34567890_IvanILYCH.csv | 34567890 |  | WS123456 | 34567890 | 34567890_WS123456 | 4 |
-| gene5 | 82.0752608 | data//WS123456_34567890_IvanILYCH.csv | WS123456_34567890_IvanILYCH.csv | 34567890 |  | WS123456 | 34567890 | 34567890_WS123456 | 5 |
-| gene6 | 25.2085669 | data//WS123456_34567890_IvanILYCH.csv | WS123456_34567890_IvanILYCH.csv | 34567890 |  | WS123456 | 34567890 | 34567890_WS123456 | 6 |
-| gene7 | 34.3805890 | data//WS123456_34567890_IvanILYCH.csv | WS123456_34567890_IvanILYCH.csv | 34567890 |  | WS123456 | 34567890 | 34567890_WS123456 | 7 |
-| gene8 | 15.1524318 | data//WS123456_34567890_IvanILYCH.csv | WS123456_34567890_IvanILYCH.csv | 34567890 |  | WS123456 | 34567890 | 34567890_WS123456 | 8 |
-| gene9 | 58.4151974 | data//WS123456_34567890_IvanILYCH.csv | WS123456_34567890_IvanILYCH.csv | 34567890 |  | WS123456 | 34567890 | 34567890_WS123456 | 9 |
-| gene10 | 76.6390498 | data//WS123456_34567890_IvanILYCH.csv | WS123456_34567890_IvanILYCH.csv | 34567890 |  | WS123456 | 34567890 | 34567890_WS123456 | 10 |
+| gene | score | filepath | filename | labno | suffix | worksheet | labno_suffix | labno_suffix_worksheet |
+|:---|---:|:---|:---|:---|:---|:---|:---|:---|
+| gene1 | 97.695514 | data//WS123456_12345678a_PierreBEZUKHOV.csv | WS123456_12345678a_PierreBEZUKHOV.csv | 12345678 | a | WS123456 | 12345678a | 12345678a_WS123456 |
+| gene2 | 11.268736 | data//WS123456_12345678a_PierreBEZUKHOV.csv | WS123456_12345678a_PierreBEZUKHOV.csv | 12345678 | a | WS123456 | 12345678a | 12345678a_WS123456 |
+| gene3 | 98.859329 | data//WS123456_12345678a_PierreBEZUKHOV.csv | WS123456_12345678a_PierreBEZUKHOV.csv | 12345678 | a | WS123456 | 12345678a | 12345678a_WS123456 |
+| gene4 | 64.011490 | data//WS123456_12345678a_PierreBEZUKHOV.csv | WS123456_12345678a_PierreBEZUKHOV.csv | 12345678 | a | WS123456 | 12345678a | 12345678a_WS123456 |
+| gene5 | 3.488505 | data//WS123456_12345678a_PierreBEZUKHOV.csv | WS123456_12345678a_PierreBEZUKHOV.csv | 12345678 | a | WS123456 | 12345678a | 12345678a_WS123456 |
 
 Then I can explore this collated data using `ggplot2`.
 

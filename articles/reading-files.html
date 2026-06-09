@@ -63,26 +63,12 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://joe-m-shaw.github.io/labtools/" class="external-link">labtools</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org" class="external-link">readr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://purrr.tidyverse.org/" class="external-link">purrr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Attaching package: 'dplyr'</span></span>
-<span><span class="co">#&gt; The following objects are masked from 'package:stats':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     filter, lag</span></span>
-<span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="the-problem">The problem<a class="anchor" aria-label="anchor" href="#the-problem"></a>
 </h2>
 <p>There are multiple files with genetic results in, and the sample
 identifiers are only in the filenames.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">files</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"data/"</span>,</span>
 <span>           pattern <span class="op">=</span> <span class="st">".*.csv"</span>,</span>
@@ -119,17 +105,9 @@ relevant identifiers.</p>
 <p>I can do this for a single file using the
 <code>read_csv_with_filename</code> function from
 <code>labtools</code>.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="../reference/read_csv_with_filename.html">read_csv_with_filename</a></span><span class="op">(</span><span class="va">files</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">10</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">2</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">chr</span> (1): gene</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">dbl</span> (1): score</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 4</span></span></span>
 <span><span class="co">#&gt;    gene   score filepath                                    filename            </span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               </span></span>
@@ -145,67 +123,25 @@ relevant identifiers.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> gene10 10.6  data//WS123456_12345678a_PierreBEZUKHOV.csv WS123456_12345678a_…</span></span></code></pre></div>
 <p>Using <code>map</code> from <code>purrr</code> I can then iterate
 this function over the file list and bind the data together.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">all_data</span> <span class="op">&lt;-</span> <span class="va">files</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">files</span><span class="op">)</span> <span class="fu"><a href="../reference/read_csv_with_filename.html">read_csv_with_filename</a></span><span class="op">(</span><span class="va">files</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="../reference/mutate_ids.html">mutate_ids</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>gene_number <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_number.html" class="external-link">parse_number</a></span><span class="op">(</span><span class="va">gene</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">10</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">2</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">chr</span> (1): gene</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">dbl</span> (1): score</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">10</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">2</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">chr</span> (1): gene</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">dbl</span> (1): score</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">10</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">2</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">chr</span> (1): gene</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">dbl</span> (1): score</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">10</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">2</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">chr</span> (1): gene</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">dbl</span> (1): score</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">10</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">2</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">chr</span> (1): gene</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">dbl</span> (1): score</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></span></code></pre></div>
+<span>  <span class="fu">map</span><span class="op">(</span>\<span class="op">(</span><span class="va">files</span><span class="op">)</span> <span class="fu"><a href="../reference/read_csv_with_filename.html">read_csv_with_filename</a></span><span class="op">(</span><span class="va">files</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">list_rbind</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="../reference/mutate_ids.html">mutate_ids</a></span><span class="op">(</span><span class="op">)</span> </span></code></pre></div>
 <p>This gives me the data in a single dataframe with each row annotated
 with the correct sample identifiers.</p>
 <table class="table">
 <colgroup>
-<col width="4%">
+<col width="3%">
 <col width="6%">
-<col width="25%">
-<col width="21%">
+<col width="27%">
+<col width="23%">
 <col width="5%">
 <col width="4%">
-<col width="5%">
-<col width="7%">
-<col width="13%">
 <col width="6%">
+<col width="8%">
+<col width="14%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">gene</th>
@@ -217,12 +153,11 @@ with the correct sample identifiers.</p>
 <th align="left">worksheet</th>
 <th align="left">labno_suffix</th>
 <th align="left">labno_suffix_worksheet</th>
-<th align="right">gene_number</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
 <td align="left">gene1</td>
-<td align="right">97.6955141</td>
+<td align="right">97.695514</td>
 <td align="left">data//WS123456_12345678a_PierreBEZUKHOV.csv</td>
 <td align="left">WS123456_12345678a_PierreBEZUKHOV.csv</td>
 <td align="left">12345678</td>
@@ -230,11 +165,10 @@ with the correct sample identifiers.</p>
 <td align="left">WS123456</td>
 <td align="left">12345678a</td>
 <td align="left">12345678a_WS123456</td>
-<td align="right">1</td>
 </tr>
 <tr class="even">
 <td align="left">gene2</td>
-<td align="right">11.2687355</td>
+<td align="right">11.268736</td>
 <td align="left">data//WS123456_12345678a_PierreBEZUKHOV.csv</td>
 <td align="left">WS123456_12345678a_PierreBEZUKHOV.csv</td>
 <td align="left">12345678</td>
@@ -242,11 +176,10 @@ with the correct sample identifiers.</p>
 <td align="left">WS123456</td>
 <td align="left">12345678a</td>
 <td align="left">12345678a_WS123456</td>
-<td align="right">2</td>
 </tr>
 <tr class="odd">
 <td align="left">gene3</td>
-<td align="right">98.8593290</td>
+<td align="right">98.859329</td>
 <td align="left">data//WS123456_12345678a_PierreBEZUKHOV.csv</td>
 <td align="left">WS123456_12345678a_PierreBEZUKHOV.csv</td>
 <td align="left">12345678</td>
@@ -254,11 +187,10 @@ with the correct sample identifiers.</p>
 <td align="left">WS123456</td>
 <td align="left">12345678a</td>
 <td align="left">12345678a_WS123456</td>
-<td align="right">3</td>
 </tr>
 <tr class="even">
 <td align="left">gene4</td>
-<td align="right">64.0114902</td>
+<td align="right">64.011490</td>
 <td align="left">data//WS123456_12345678a_PierreBEZUKHOV.csv</td>
 <td align="left">WS123456_12345678a_PierreBEZUKHOV.csv</td>
 <td align="left">12345678</td>
@@ -266,11 +198,10 @@ with the correct sample identifiers.</p>
 <td align="left">WS123456</td>
 <td align="left">12345678a</td>
 <td align="left">12345678a_WS123456</td>
-<td align="right">4</td>
 </tr>
 <tr class="odd">
 <td align="left">gene5</td>
-<td align="right">3.4885046</td>
+<td align="right">3.488505</td>
 <td align="left">data//WS123456_12345678a_PierreBEZUKHOV.csv</td>
 <td align="left">WS123456_12345678a_PierreBEZUKHOV.csv</td>
 <td align="left">12345678</td>
@@ -278,547 +209,6 @@ with the correct sample identifiers.</p>
 <td align="left">WS123456</td>
 <td align="left">12345678a</td>
 <td align="left">12345678a_WS123456</td>
-<td align="right">5</td>
-</tr>
-<tr class="even">
-<td align="left">gene6</td>
-<td align="right">11.3642443</td>
-<td align="left">data//WS123456_12345678a_PierreBEZUKHOV.csv</td>
-<td align="left">WS123456_12345678a_PierreBEZUKHOV.csv</td>
-<td align="left">12345678</td>
-<td align="left">a</td>
-<td align="left">WS123456</td>
-<td align="left">12345678a</td>
-<td align="left">12345678a_WS123456</td>
-<td align="right">6</td>
-</tr>
-<tr class="odd">
-<td align="left">gene7</td>
-<td align="right">86.7547998</td>
-<td align="left">data//WS123456_12345678a_PierreBEZUKHOV.csv</td>
-<td align="left">WS123456_12345678a_PierreBEZUKHOV.csv</td>
-<td align="left">12345678</td>
-<td align="left">a</td>
-<td align="left">WS123456</td>
-<td align="left">12345678a</td>
-<td align="left">12345678a_WS123456</td>
-<td align="right">7</td>
-</tr>
-<tr class="even">
-<td align="left">gene8</td>
-<td align="right">13.8269989</td>
-<td align="left">data//WS123456_12345678a_PierreBEZUKHOV.csv</td>
-<td align="left">WS123456_12345678a_PierreBEZUKHOV.csv</td>
-<td align="left">12345678</td>
-<td align="left">a</td>
-<td align="left">WS123456</td>
-<td align="left">12345678a</td>
-<td align="left">12345678a_WS123456</td>
-<td align="right">8</td>
-</tr>
-<tr class="odd">
-<td align="left">gene9</td>
-<td align="right">49.7064066</td>
-<td align="left">data//WS123456_12345678a_PierreBEZUKHOV.csv</td>
-<td align="left">WS123456_12345678a_PierreBEZUKHOV.csv</td>
-<td align="left">12345678</td>
-<td align="left">a</td>
-<td align="left">WS123456</td>
-<td align="left">12345678a</td>
-<td align="left">12345678a_WS123456</td>
-<td align="right">9</td>
-</tr>
-<tr class="even">
-<td align="left">gene10</td>
-<td align="right">10.6104016</td>
-<td align="left">data//WS123456_12345678a_PierreBEZUKHOV.csv</td>
-<td align="left">WS123456_12345678a_PierreBEZUKHOV.csv</td>
-<td align="left">12345678</td>
-<td align="left">a</td>
-<td align="left">WS123456</td>
-<td align="left">12345678a</td>
-<td align="left">12345678a_WS123456</td>
-<td align="right">10</td>
-</tr>
-<tr class="odd">
-<td align="left">gene1</td>
-<td align="right">5.4439993</td>
-<td align="left">data//WS123456_12345678b_PierreBEZUKHOV.csv</td>
-<td align="left">WS123456_12345678b_PierreBEZUKHOV.csv</td>
-<td align="left">12345678</td>
-<td align="left">b</td>
-<td align="left">WS123456</td>
-<td align="left">12345678b</td>
-<td align="left">12345678b_WS123456</td>
-<td align="right">1</td>
-</tr>
-<tr class="even">
-<td align="left">gene2</td>
-<td align="right">72.0719737</td>
-<td align="left">data//WS123456_12345678b_PierreBEZUKHOV.csv</td>
-<td align="left">WS123456_12345678b_PierreBEZUKHOV.csv</td>
-<td align="left">12345678</td>
-<td align="left">b</td>
-<td align="left">WS123456</td>
-<td align="left">12345678b</td>
-<td align="left">12345678b_WS123456</td>
-<td align="right">2</td>
-</tr>
-<tr class="odd">
-<td align="left">gene3</td>
-<td align="right">60.4684200</td>
-<td align="left">data//WS123456_12345678b_PierreBEZUKHOV.csv</td>
-<td align="left">WS123456_12345678b_PierreBEZUKHOV.csv</td>
-<td align="left">12345678</td>
-<td align="left">b</td>
-<td align="left">WS123456</td>
-<td align="left">12345678b</td>
-<td align="left">12345678b_WS123456</td>
-<td align="right">3</td>
-</tr>
-<tr class="even">
-<td align="left">gene4</td>
-<td align="right">79.2336205</td>
-<td align="left">data//WS123456_12345678b_PierreBEZUKHOV.csv</td>
-<td align="left">WS123456_12345678b_PierreBEZUKHOV.csv</td>
-<td align="left">12345678</td>
-<td align="left">b</td>
-<td align="left">WS123456</td>
-<td align="left">12345678b</td>
-<td align="left">12345678b_WS123456</td>
-<td align="right">4</td>
-</tr>
-<tr class="odd">
-<td align="left">gene5</td>
-<td align="right">24.4005622</td>
-<td align="left">data//WS123456_12345678b_PierreBEZUKHOV.csv</td>
-<td align="left">WS123456_12345678b_PierreBEZUKHOV.csv</td>
-<td align="left">12345678</td>
-<td align="left">b</td>
-<td align="left">WS123456</td>
-<td align="left">12345678b</td>
-<td align="left">12345678b_WS123456</td>
-<td align="right">5</td>
-</tr>
-<tr class="even">
-<td align="left">gene6</td>
-<td align="right">11.0944414</td>
-<td align="left">data//WS123456_12345678b_PierreBEZUKHOV.csv</td>
-<td align="left">WS123456_12345678b_PierreBEZUKHOV.csv</td>
-<td align="left">12345678</td>
-<td align="left">b</td>
-<td align="left">WS123456</td>
-<td align="left">12345678b</td>
-<td align="left">12345678b_WS123456</td>
-<td align="right">6</td>
-</tr>
-<tr class="odd">
-<td align="left">gene7</td>
-<td align="right">3.3582193</td>
-<td align="left">data//WS123456_12345678b_PierreBEZUKHOV.csv</td>
-<td align="left">WS123456_12345678b_PierreBEZUKHOV.csv</td>
-<td align="left">12345678</td>
-<td align="left">b</td>
-<td align="left">WS123456</td>
-<td align="left">12345678b</td>
-<td align="left">12345678b_WS123456</td>
-<td align="right">7</td>
-</tr>
-<tr class="even">
-<td align="left">gene8</td>
-<td align="right">98.3774984</td>
-<td align="left">data//WS123456_12345678b_PierreBEZUKHOV.csv</td>
-<td align="left">WS123456_12345678b_PierreBEZUKHOV.csv</td>
-<td align="left">12345678</td>
-<td align="left">b</td>
-<td align="left">WS123456</td>
-<td align="left">12345678b</td>
-<td align="left">12345678b_WS123456</td>
-<td align="right">8</td>
-</tr>
-<tr class="odd">
-<td align="left">gene9</td>
-<td align="right">55.4686784</td>
-<td align="left">data//WS123456_12345678b_PierreBEZUKHOV.csv</td>
-<td align="left">WS123456_12345678b_PierreBEZUKHOV.csv</td>
-<td align="left">12345678</td>
-<td align="left">b</td>
-<td align="left">WS123456</td>
-<td align="left">12345678b</td>
-<td align="left">12345678b_WS123456</td>
-<td align="right">9</td>
-</tr>
-<tr class="even">
-<td align="left">gene10</td>
-<td align="right">80.9327019</td>
-<td align="left">data//WS123456_12345678b_PierreBEZUKHOV.csv</td>
-<td align="left">WS123456_12345678b_PierreBEZUKHOV.csv</td>
-<td align="left">12345678</td>
-<td align="left">b</td>
-<td align="left">WS123456</td>
-<td align="left">12345678b</td>
-<td align="left">12345678b_WS123456</td>
-<td align="right">10</td>
-</tr>
-<tr class="odd">
-<td align="left">gene1</td>
-<td align="right">94.2702363</td>
-<td align="left">data//WS123456_12345678c_PierreBEZUKHOV.csv</td>
-<td align="left">WS123456_12345678c_PierreBEZUKHOV.csv</td>
-<td align="left">12345678</td>
-<td align="left">c</td>
-<td align="left">WS123456</td>
-<td align="left">12345678c</td>
-<td align="left">12345678c_WS123456</td>
-<td align="right">1</td>
-</tr>
-<tr class="even">
-<td align="left">gene2</td>
-<td align="right">84.8811300</td>
-<td align="left">data//WS123456_12345678c_PierreBEZUKHOV.csv</td>
-<td align="left">WS123456_12345678c_PierreBEZUKHOV.csv</td>
-<td align="left">12345678</td>
-<td align="left">c</td>
-<td align="left">WS123456</td>
-<td align="left">12345678c</td>
-<td align="left">12345678c_WS123456</td>
-<td align="right">2</td>
-</tr>
-<tr class="odd">
-<td align="left">gene3</td>
-<td align="right">89.4712796</td>
-<td align="left">data//WS123456_12345678c_PierreBEZUKHOV.csv</td>
-<td align="left">WS123456_12345678c_PierreBEZUKHOV.csv</td>
-<td align="left">12345678</td>
-<td align="left">c</td>
-<td align="left">WS123456</td>
-<td align="left">12345678c</td>
-<td align="left">12345678c_WS123456</td>
-<td align="right">3</td>
-</tr>
-<tr class="even">
-<td align="left">gene4</td>
-<td align="right">62.9010040</td>
-<td align="left">data//WS123456_12345678c_PierreBEZUKHOV.csv</td>
-<td align="left">WS123456_12345678c_PierreBEZUKHOV.csv</td>
-<td align="left">12345678</td>
-<td align="left">c</td>
-<td align="left">WS123456</td>
-<td align="left">12345678c</td>
-<td align="left">12345678c_WS123456</td>
-<td align="right">4</td>
-</tr>
-<tr class="odd">
-<td align="left">gene5</td>
-<td align="right">50.5924463</td>
-<td align="left">data//WS123456_12345678c_PierreBEZUKHOV.csv</td>
-<td align="left">WS123456_12345678c_PierreBEZUKHOV.csv</td>
-<td align="left">12345678</td>
-<td align="left">c</td>
-<td align="left">WS123456</td>
-<td align="left">12345678c</td>
-<td align="left">12345678c_WS123456</td>
-<td align="right">5</td>
-</tr>
-<tr class="even">
-<td align="left">gene6</td>
-<td align="right">25.2354199</td>
-<td align="left">data//WS123456_12345678c_PierreBEZUKHOV.csv</td>
-<td align="left">WS123456_12345678c_PierreBEZUKHOV.csv</td>
-<td align="left">12345678</td>
-<td align="left">c</td>
-<td align="left">WS123456</td>
-<td align="left">12345678c</td>
-<td align="left">12345678c_WS123456</td>
-<td align="right">6</td>
-</tr>
-<tr class="odd">
-<td align="left">gene7</td>
-<td align="right">67.6015973</td>
-<td align="left">data//WS123456_12345678c_PierreBEZUKHOV.csv</td>
-<td align="left">WS123456_12345678c_PierreBEZUKHOV.csv</td>
-<td align="left">12345678</td>
-<td align="left">c</td>
-<td align="left">WS123456</td>
-<td align="left">12345678c</td>
-<td align="left">12345678c_WS123456</td>
-<td align="right">7</td>
-</tr>
-<tr class="even">
-<td align="left">gene8</td>
-<td align="right">14.0432803</td>
-<td align="left">data//WS123456_12345678c_PierreBEZUKHOV.csv</td>
-<td align="left">WS123456_12345678c_PierreBEZUKHOV.csv</td>
-<td align="left">12345678</td>
-<td align="left">c</td>
-<td align="left">WS123456</td>
-<td align="left">12345678c</td>
-<td align="left">12345678c_WS123456</td>
-<td align="right">8</td>
-</tr>
-<tr class="odd">
-<td align="left">gene9</td>
-<td align="right">75.8114634</td>
-<td align="left">data//WS123456_12345678c_PierreBEZUKHOV.csv</td>
-<td align="left">WS123456_12345678c_PierreBEZUKHOV.csv</td>
-<td align="left">12345678</td>
-<td align="left">c</td>
-<td align="left">WS123456</td>
-<td align="left">12345678c</td>
-<td align="left">12345678c_WS123456</td>
-<td align="right">9</td>
-</tr>
-<tr class="even">
-<td align="left">gene10</td>
-<td align="right">95.3160182</td>
-<td align="left">data//WS123456_12345678c_PierreBEZUKHOV.csv</td>
-<td align="left">WS123456_12345678c_PierreBEZUKHOV.csv</td>
-<td align="left">12345678</td>
-<td align="left">c</td>
-<td align="left">WS123456</td>
-<td align="left">12345678c</td>
-<td align="left">12345678c_WS123456</td>
-<td align="right">10</td>
-</tr>
-<tr class="odd">
-<td align="left">gene1</td>
-<td align="right">50.4452151</td>
-<td align="left">data//WS123456_23456789_AnnaKARENINA.csv</td>
-<td align="left">WS123456_23456789_AnnaKARENINA.csv</td>
-<td align="left">23456789</td>
-<td align="left"></td>
-<td align="left">WS123456</td>
-<td align="left">23456789</td>
-<td align="left">23456789_WS123456</td>
-<td align="right">1</td>
-</tr>
-<tr class="even">
-<td align="left">gene2</td>
-<td align="right">94.4651708</td>
-<td align="left">data//WS123456_23456789_AnnaKARENINA.csv</td>
-<td align="left">WS123456_23456789_AnnaKARENINA.csv</td>
-<td align="left">23456789</td>
-<td align="left"></td>
-<td align="left">WS123456</td>
-<td align="left">23456789</td>
-<td align="left">23456789_WS123456</td>
-<td align="right">2</td>
-</tr>
-<tr class="odd">
-<td align="left">gene3</td>
-<td align="right">36.3450093</td>
-<td align="left">data//WS123456_23456789_AnnaKARENINA.csv</td>
-<td align="left">WS123456_23456789_AnnaKARENINA.csv</td>
-<td align="left">23456789</td>
-<td align="left"></td>
-<td align="left">WS123456</td>
-<td align="left">23456789</td>
-<td align="left">23456789_WS123456</td>
-<td align="right">3</td>
-</tr>
-<tr class="even">
-<td align="left">gene4</td>
-<td align="right">1.7642395</td>
-<td align="left">data//WS123456_23456789_AnnaKARENINA.csv</td>
-<td align="left">WS123456_23456789_AnnaKARENINA.csv</td>
-<td align="left">23456789</td>
-<td align="left"></td>
-<td align="left">WS123456</td>
-<td align="left">23456789</td>
-<td align="left">23456789_WS123456</td>
-<td align="right">4</td>
-</tr>
-<tr class="odd">
-<td align="left">gene5</td>
-<td align="right">89.2965208</td>
-<td align="left">data//WS123456_23456789_AnnaKARENINA.csv</td>
-<td align="left">WS123456_23456789_AnnaKARENINA.csv</td>
-<td align="left">23456789</td>
-<td align="left"></td>
-<td align="left">WS123456</td>
-<td align="left">23456789</td>
-<td align="left">23456789_WS123456</td>
-<td align="right">5</td>
-</tr>
-<tr class="even">
-<td align="left">gene6</td>
-<td align="right">70.4437311</td>
-<td align="left">data//WS123456_23456789_AnnaKARENINA.csv</td>
-<td align="left">WS123456_23456789_AnnaKARENINA.csv</td>
-<td align="left">23456789</td>
-<td align="left"></td>
-<td align="left">WS123456</td>
-<td align="left">23456789</td>
-<td align="left">23456789_WS123456</td>
-<td align="right">6</td>
-</tr>
-<tr class="odd">
-<td align="left">gene7</td>
-<td align="right">42.9037774</td>
-<td align="left">data//WS123456_23456789_AnnaKARENINA.csv</td>
-<td align="left">WS123456_23456789_AnnaKARENINA.csv</td>
-<td align="left">23456789</td>
-<td align="left"></td>
-<td align="left">WS123456</td>
-<td align="left">23456789</td>
-<td align="left">23456789_WS123456</td>
-<td align="right">7</td>
-</tr>
-<tr class="even">
-<td align="left">gene8</td>
-<td align="right">60.4224573</td>
-<td align="left">data//WS123456_23456789_AnnaKARENINA.csv</td>
-<td align="left">WS123456_23456789_AnnaKARENINA.csv</td>
-<td align="left">23456789</td>
-<td align="left"></td>
-<td align="left">WS123456</td>
-<td align="left">23456789</td>
-<td align="left">23456789_WS123456</td>
-<td align="right">8</td>
-</tr>
-<tr class="odd">
-<td align="left">gene9</td>
-<td align="right">88.9575026</td>
-<td align="left">data//WS123456_23456789_AnnaKARENINA.csv</td>
-<td align="left">WS123456_23456789_AnnaKARENINA.csv</td>
-<td align="left">23456789</td>
-<td align="left"></td>
-<td align="left">WS123456</td>
-<td align="left">23456789</td>
-<td align="left">23456789_WS123456</td>
-<td align="right">9</td>
-</tr>
-<tr class="even">
-<td align="left">gene10</td>
-<td align="right">0.5565599</td>
-<td align="left">data//WS123456_23456789_AnnaKARENINA.csv</td>
-<td align="left">WS123456_23456789_AnnaKARENINA.csv</td>
-<td align="left">23456789</td>
-<td align="left"></td>
-<td align="left">WS123456</td>
-<td align="left">23456789</td>
-<td align="left">23456789_WS123456</td>
-<td align="right">10</td>
-</tr>
-<tr class="odd">
-<td align="left">gene1</td>
-<td align="right">43.3481782</td>
-<td align="left">data//WS123456_34567890_IvanILYCH.csv</td>
-<td align="left">WS123456_34567890_IvanILYCH.csv</td>
-<td align="left">34567890</td>
-<td align="left"></td>
-<td align="left">WS123456</td>
-<td align="left">34567890</td>
-<td align="left">34567890_WS123456</td>
-<td align="right">1</td>
-</tr>
-<tr class="even">
-<td align="left">gene2</td>
-<td align="right">25.9921850</td>
-<td align="left">data//WS123456_34567890_IvanILYCH.csv</td>
-<td align="left">WS123456_34567890_IvanILYCH.csv</td>
-<td align="left">34567890</td>
-<td align="left"></td>
-<td align="left">WS123456</td>
-<td align="left">34567890</td>
-<td align="left">34567890_WS123456</td>
-<td align="right">2</td>
-</tr>
-<tr class="odd">
-<td align="left">gene3</td>
-<td align="right">11.1211967</td>
-<td align="left">data//WS123456_34567890_IvanILYCH.csv</td>
-<td align="left">WS123456_34567890_IvanILYCH.csv</td>
-<td align="left">34567890</td>
-<td align="left"></td>
-<td align="left">WS123456</td>
-<td align="left">34567890</td>
-<td align="left">34567890_WS123456</td>
-<td align="right">3</td>
-</tr>
-<tr class="even">
-<td align="left">gene4</td>
-<td align="right">34.3106907</td>
-<td align="left">data//WS123456_34567890_IvanILYCH.csv</td>
-<td align="left">WS123456_34567890_IvanILYCH.csv</td>
-<td align="left">34567890</td>
-<td align="left"></td>
-<td align="left">WS123456</td>
-<td align="left">34567890</td>
-<td align="left">34567890_WS123456</td>
-<td align="right">4</td>
-</tr>
-<tr class="odd">
-<td align="left">gene5</td>
-<td align="right">82.0752608</td>
-<td align="left">data//WS123456_34567890_IvanILYCH.csv</td>
-<td align="left">WS123456_34567890_IvanILYCH.csv</td>
-<td align="left">34567890</td>
-<td align="left"></td>
-<td align="left">WS123456</td>
-<td align="left">34567890</td>
-<td align="left">34567890_WS123456</td>
-<td align="right">5</td>
-</tr>
-<tr class="even">
-<td align="left">gene6</td>
-<td align="right">25.2085669</td>
-<td align="left">data//WS123456_34567890_IvanILYCH.csv</td>
-<td align="left">WS123456_34567890_IvanILYCH.csv</td>
-<td align="left">34567890</td>
-<td align="left"></td>
-<td align="left">WS123456</td>
-<td align="left">34567890</td>
-<td align="left">34567890_WS123456</td>
-<td align="right">6</td>
-</tr>
-<tr class="odd">
-<td align="left">gene7</td>
-<td align="right">34.3805890</td>
-<td align="left">data//WS123456_34567890_IvanILYCH.csv</td>
-<td align="left">WS123456_34567890_IvanILYCH.csv</td>
-<td align="left">34567890</td>
-<td align="left"></td>
-<td align="left">WS123456</td>
-<td align="left">34567890</td>
-<td align="left">34567890_WS123456</td>
-<td align="right">7</td>
-</tr>
-<tr class="even">
-<td align="left">gene8</td>
-<td align="right">15.1524318</td>
-<td align="left">data//WS123456_34567890_IvanILYCH.csv</td>
-<td align="left">WS123456_34567890_IvanILYCH.csv</td>
-<td align="left">34567890</td>
-<td align="left"></td>
-<td align="left">WS123456</td>
-<td align="left">34567890</td>
-<td align="left">34567890_WS123456</td>
-<td align="right">8</td>
-</tr>
-<tr class="odd">
-<td align="left">gene9</td>
-<td align="right">58.4151974</td>
-<td align="left">data//WS123456_34567890_IvanILYCH.csv</td>
-<td align="left">WS123456_34567890_IvanILYCH.csv</td>
-<td align="left">34567890</td>
-<td align="left"></td>
-<td align="left">WS123456</td>
-<td align="left">34567890</td>
-<td align="left">34567890_WS123456</td>
-<td align="right">9</td>
-</tr>
-<tr class="even">
-<td align="left">gene10</td>
-<td align="right">76.6390498</td>
-<td align="left">data//WS123456_34567890_IvanILYCH.csv</td>
-<td align="left">WS123456_34567890_IvanILYCH.csv</td>
-<td align="left">34567890</td>
-<td align="left"></td>
-<td align="left">WS123456</td>
-<td align="left">34567890</td>
-<td align="left">34567890_WS123456</td>
-<td align="right">10</td>
 </tr>
 </tbody>
 </table>
