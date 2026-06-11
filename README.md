@@ -5,6 +5,8 @@
 
 <!-- badges: start -->
 
+[![Codecov test
+coverage](https://codecov.io/gh/joe-m-shaw/labtools/graph/badge.svg)](https://app.codecov.io/gh/joe-m-shaw/labtools)
 <!-- badges: end -->
 
 `labtools` is a package for exploratory data analysis at the North West
