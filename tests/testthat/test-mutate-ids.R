@@ -183,3 +183,21 @@ test_that("filename with a different order is handled correctly", {
 
 })
 
+test_that("mutate_ids handles addition of dev in the filename", {
+
+  input <- tibble::tibble(
+    "filename" = c("Results_SNVs_Indels-WS123456dev_12345678_test.xlsx"))
+
+    expected_df <- tibble::tibble(
+      "filename" = c("Results_SNVs_Indels-WS123456dev_12345678_test.xlsx"),
+      "labno" = c("12345678"),
+      "suffix" = c(""),
+      "worksheet" = c("WS123456"),
+      "labno_suffix" = c("12345678"),
+      "labno_suffix_worksheet" = c("12345678_WS123456")
+    )
+
+    expect_equal(mutate_ids(input),
+                 expected_df)
+
+})
